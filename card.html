@@ -51,6 +51,25 @@
             color: #a5b4fc;
             text-decoration: underline;
         }
+        .call-btn {
+            display: block;
+            width: 100%;
+            background-color: #4f46e5;
+            color: white;
+            text-align: center;
+            padding: 12px 0;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 15px;
+            margin-top: 20px;
+            text-decoration: none;
+            box-sizing: border-box;
+            transition: background-color 0.2s;
+        }
+        .call-btn:hover {
+            background-color: #4338ca;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -60,6 +79,9 @@
         <div class="item"><span class="icon">📞</span><a id="phone-link" href="#"><span id="phone">Loading...</span></a></div>
         <div class="item"><span class="icon">✉️</span><a id="email-link" href="#"><span id="email">Loading...</span></a></div>
         <div class="item"><span class="icon">💼</span><span id="company">Loading...</span></div>
+        
+        <!-- Dedicated Call Button -->
+        <a id="call-action-btn" class="call-btn" href="#">📞 Call Now</a>
     </div>
 
     <script>
@@ -75,12 +97,16 @@
         document.getElementById('email').textContent = email;
         document.getElementById('company').textContent = company;
 
-        // Make phone number clickable to open dial pad
+        // Make phone number and button trigger the phone dialer
         if (phone !== 'N/A') {
-            document.getElementById('phone-link').href = `tel:${phone}`;
+            const telUrl = `tel:${phone}`;
+            document.getElementById('phone-link').href = telUrl;
+            document.getElementById('call-action-btn').href = telUrl;
+        } else {
+            document.getElementById('call-action-btn').style.display = 'none';
         }
 
-        // Make email clickable to open email client
+        // Make email clickable
         if (email !== 'N/A') {
             document.getElementById('email-link').href = `mailto:${email}`;
         }
