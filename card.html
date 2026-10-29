@@ -43,23 +43,47 @@
             margin-right: 12px;
             font-size: 20px;
         }
+        a {
+            color: white;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #a5b4fc;
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
     <div class="card">
         <div class="header">Digital Business Card</div>
         <div class="item"><span class="icon">👤</span><span id="name">Loading...</span></div>
-        <div class="item"><span class="icon">📞</span><span id="phone">Loading...</span></div>
-        <div class="item"><span class="icon">✉️</span><span id="email">Loading...</span></div>
+        <div class="item"><span class="icon">📞</span><a id="phone-link" href="#"><span id="phone">Loading...</span></a></div>
+        <div class="item"><span class="icon">✉️</span><a id="email-link" href="#"><span id="email">Loading...</span></a></div>
         <div class="item"><span class="icon">💼</span><span id="company">Loading...</span></div>
     </div>
 
     <script>
         const params = new URLSearchParams(window.location.search);
-        document.getElementById('name').textContent = params.get('name') || 'N/A';
-        document.getElementById('phone').textContent = params.get('phone') || 'N/A';
-        document.getElementById('email').textContent = params.get('email') || 'N/A';
-        document.getElementById('company').textContent = params.get('company') || 'N/A';
+        
+        const name = params.get('name') || 'N/A';
+        const phone = params.get('phone') || 'N/A';
+        const email = params.get('email') || 'N/A';
+        const company = params.get('company') || 'N/A';
+
+        document.getElementById('name').textContent = name;
+        document.getElementById('phone').textContent = phone;
+        document.getElementById('email').textContent = email;
+        document.getElementById('company').textContent = company;
+
+        // Make phone number clickable to open dial pad
+        if (phone !== 'N/A') {
+            document.getElementById('phone-link').href = `tel:${phone}`;
+        }
+
+        // Make email clickable to open email client
+        if (email !== 'N/A') {
+            document.getElementById('email-link').href = `mailto:${email}`;
+        }
     </script>
 </body>
 </html>
